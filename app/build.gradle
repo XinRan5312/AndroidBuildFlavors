@@ -1,0 +1,137 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.2"
+//    //签名
+//    signingConfigs {
+//        debugConfig {
+//            storeFile file("../wooyun_keystore")      //签名文件
+//            storePassword "123456"
+//            keyAlias "123456"
+//            keyPassword "123456"  //签名密码
+//        }
+    defaultConfig {
+        applicationId "com.fhkg.androidflavors"
+        minSdkVersion 8
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        // 自定义输出配置
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为wooyun_v1.0_wandoujia.apk
+//                        def fileName = "wooyun_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+        }
+    }
+    productFlavors {
+        defaultFlavor {
+            // 每个环境包名不同
+            applicationId "com.capping.xinran.cappingnews"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "default"
+            resValue "bool", "isrRank", 'false'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"def"'
+            // 修改 AndroidManifest.xml 里渠道变量和APP 桌面Icon
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "defalut",
+                                    app_icon: "@drawable/ic_launcher"]
+        }
+        baidu {
+            applicationId "com.capping.xinran.cappingnews.baidu"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "baidu"
+            resValue "bool", "isrRank", 'true'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"baidu"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "baidu",
+                                    app_icon:"@drawable/icon_uc_normal"]
+        }
+        google {
+            applicationId "com.capping.xinran.cappingnews.google"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "google"
+            resValue "bool", "isrRank", 'true'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"google"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "google",
+                                    app_icon: "@drawable/loading_01"]
+        }
+        wandoujia {
+            applicationId "com.capping.xinran.cappingnews.wandoujia"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！AndroidManifest中刚开始会引用不到，build一下就好了
+            resValue "string", "app_name", "wandoujia"
+            resValue "bool", "isrRank", 'false'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"wandoujia"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "wandoujia",
+                                    app_icon: "@drawable/ic_launcher"]
+        }
+        xiaomi {
+            applicationId "com.capping.xinran.cappingnews.xiaomi"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "xiaomi"
+            resValue "bool", "isrRank", 'true'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "xiaomi",
+                                    app_icon: "@drawable/ic_launcher"]
+        }
+        huawei {
+            applicationId "com.capping.xinran.cappingnews.huawei"
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "huawei"
+            resValue "bool", "isrRank", 'true'
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"huawei"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [UMENG_CHANNEL_ID: "huawei",
+                                    app_icon: "@drawable/ic_launcher"]
+        }
+    }
+    //只是简单的多渠道打包还可以这样
+//    productFlavors {
+//        kuan {}
+//        xiaomi {}
+//        qh360 {}
+//        baidu {}
+//        wandoujia {}
+//    }
+//
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
+    //移除lint错误
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
+}
