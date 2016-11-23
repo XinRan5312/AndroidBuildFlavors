@@ -265,7 +265,4 @@ productFlavors {
 最后放上一个项目地址：
 https://github.com/Wing-Li/boon
 
-文／Wing_Li（简书作者）
-原文链接：http://www.jianshu.com/p/533240d222d3
-著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。
-源自：http://www.jianshu.com/p/533240d222d3 
+APPWidget:http://blog.csdn.net/sasoritattoo/article/details/17616597

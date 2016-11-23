@@ -16,7 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 声明widget对应的AppWidgetProvider -->
+        <receiver android:name="com.fhkg.androidflavors.appwidget.QxAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.qx.widget.UPDATE_ALL"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/example_appwidget_info" />
+        </receiver>
 
+        <service android:name="com.fhkg.androidflavors.appwidget.QxAppWidgetService" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.EXAMPLE_APP_WIDGET_SERVICE" />
+            </intent-filter>
+        </service>
     </application>
     <meta-data
         android:name="UMENG_CHANNEL"
