@@ -265,4 +265,5 @@ productFlavors {
 最后放上一个项目地址：
 https://github.com/Wing-Li/boon
 
-APPWidget:http://blog.csdn.net/sasoritattoo/article/details/17616597
+APPWidget桌面小控件:http://blog.csdn.net/sasoritattoo/article/details/17616597
+2016-11-23：桌面快捷键的创建

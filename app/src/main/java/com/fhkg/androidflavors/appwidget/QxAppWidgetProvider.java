@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.fhkg.androidflavors.MainActivity;
 import com.fhkg.androidflavors.R;
 
 import java.util.HashSet;
@@ -119,7 +120,8 @@ public class QxAppWidgetProvider extends AppWidgetProvider {
             int buttonId = Integer.parseInt(data.getSchemeSpecificPart());
             if (buttonId == BUTTON_SHOW) {
                 Log.d(TAG, "Button wifi clicked");
-                Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show();
+              Toast.makeText(context, "Button Clicked", Toast.LENGTH_SHORT).show();
+
             }
         }
 
@@ -149,9 +151,13 @@ public class QxAppWidgetProvider extends AppWidgetProvider {
             remoteView.setImageViewResource(R.id.iv_show, ARR_IMAGES[index]);
 
             // 设置点击按钮对应的PendingIntent：即点击按钮时，发送广播。
-            remoteView.setOnClickPendingIntent(R.id.btn_show, getPendingIntent(context,
-                    BUTTON_SHOW));
-
+//            remoteView.setOnClickPendingIntent(R.id.btn_show, getPendingIntent(context,
+//                    BUTTON_SHOW));
+            //点击某个控件（R.id.btn_show）跳转到指定Activity（MainActivity）
+            Intent intent = new Intent(context,MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(
+                    context, 0, intent, 0);
+            remoteView.setOnClickPendingIntent(R.id.btn_show,pendingIntent);
             // 更新 widget
             appWidgetManager.updateAppWidget(appID, remoteView);
         }
